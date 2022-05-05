@@ -52,7 +52,6 @@ export default {
    return id ? true : console.warn("Id is missing");
   },
  },
- // ^ the function receives the data to be emitted as parameters
  data() {
   return {
    detailsAreVisible: false,

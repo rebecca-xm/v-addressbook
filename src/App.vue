@@ -1,5 +1,6 @@
 <template>
  <section>
+  <add-friend @new-friend="addNewFriend"></add-friend>
   <ul>
    <friend-contact
     v-for="friend of friends"
@@ -25,7 +26,7 @@ export default {
      name: "Manuel Lorenz",
      phone: "0123 45678 90",
      email: "manuel@localhost.com",
-     isFavorite: true,
+     isFavorite: false,
     },
     {
      id: "julie",
@@ -43,6 +44,16 @@ export default {
     (friend) => friend.id === friendId
    );
    identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+  },
+  addNewFriend(name, phone, email) {
+   const newFriendContact = {
+    id: Math.random().toString(),
+    name: name,
+    phone: phone,
+    email: email,
+    isFavorite: false,
+   };
+   this.friends.push(newFriendContact);
   },
  },
 };
@@ -66,7 +77,8 @@ body {
  list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
  margin: 1rem auto;
  padding: 1rem;
@@ -98,5 +110,21 @@ body {
  background-color: #31a1ec;
  border-color: #31a1ec;
  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+#app input {
+ font: inherit;
+ padding: 0.15rem;
+}
+
+#app label {
+ display: inline-block;
+ font-weight: bold;
+ margin-right: 1rem;
+ width: 7rem;
+}
+
+#app form div {
+ margin: 1rem 0;
 }
 </style>
