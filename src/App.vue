@@ -1,26 +1,6 @@
 <template>
  <section>
   <ul>
-   <!-- <friend-contact
-    name="Manuel Lorenz"
-    phone-number="0123 45678 90"
-    email-address="manuel@localhost.com"
-    is-favorite="1"
-   ></friend-contact>
-   <friend-contact
-    name="Julie Jones"
-    phone-number="0987 654421 21"
-    email-address="julie@localhost.com"
-    is-favorite="0"
-   ></friend-contact> -->
-   <!-- 01
-    Once the components props are set, these need to be passed 
-    inside of the components itself.
-    cont => FriendContact.vue 
-
-    Note: props are used to pass data from the parent to the child.
-    Also, props typically should not be mutated.
-    e.g. is-favorite -->
    <friend-contact
     v-for="friend of friends"
     :key="friend.id"
