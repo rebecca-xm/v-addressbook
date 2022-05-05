@@ -2,7 +2,8 @@
  <li>
   <!-- <h2>{{ friend.name }}</h2> -->
   <!-- <h2>{{ name }} {{ isFavorite === "1" ? "(Favorite)" : "" }}</h2> -->
-  <h2>{{ name }} {{ friendIsFavorite ? "(Favorite)" : "" }}</h2>
+  <!-- <h2>{{ name }} {{ friendIsFavorite ? "(Favorite)" : "" }}</h2> -->
+  <h2>{{ name }} {{ isFavorite ? "(Favorite)" : "" }}</h2>
   <button @click="toggleDetails">
    {{ detailsAreVisible ? "Hide" : "Show" }} Details
   </button>
@@ -44,6 +45,10 @@ HTML: kebab-case <==> JavaScript: camelCase -->
 export default {
  //  props: ["name", "phoneNumber", "emailAddress", "isFavorite"],
  props: {
+  id: {
+   type: String,
+   required: true,
+  },
   name: {
    type: String,
    required: true,
@@ -74,7 +79,7 @@ export default {
     phone: "0123 45678 90",
     email: "manuel@localhost.com",
    },
-   friendIsFavorite: this.isFavorite,
+//    friendIsFavorite: this.isFavorite,
   };
  },
  methods: {
@@ -88,7 +93,7 @@ export default {
   //   this.isFavorite = "1";
   //  }
   // },
-  /**
+  /** 03
    * once saved, Vue will return the following error
    *  => Unexpected mutation of "isFavorite" prop vue/no-mutating-props
    * because the data passed from App to FriendContact should only
@@ -114,7 +119,16 @@ export default {
    //  } else {
    //   this.friendIsFavorite = "1";
    //  }
-   this.friendIsFavorite = !this.friendIsFavorite;
+
+   //    this.friendIsFavorite = !this.friendIsFavorite;
+
+   // 04
+   this.$emit("toggle-favorite", this.id);
+   // ^ events emitter to communicate with the parent
+   // it takes at least one argument, which is the name of the custom event
+   // here the convention is kebab-case, despite being inside of JS.
+   // In App.vue, where the component is used, we can listen to this event
+   // with v-on or the @shorthand.
   },
  },
 };
