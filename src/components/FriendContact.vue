@@ -15,6 +15,7 @@
     {{ emailAddress }}
    </li>
   </ul>
+  <button @click="removeFriend">Remove</button>
  </li>
 </template>
 
@@ -43,24 +44,16 @@ export default {
    default: false,
   },
  },
- //*  in props we decide which props this component receives,
- //*  while in emits we define which custom events the component
- //*  will at some point emit
- //  emits: ['toggle-favorite'], <= basic form
- emits: {
-  "toggle-favorite": function (id) {
-   return id ? true : console.warn("Id is missing");
-  },
- },
+ emits: ["toggle-favorite", "remove-friend"],
+ //  emits: {
+ //   "toggle-favorite": function (id) {
+ //    return id ? true : console.warn("Id is missing");
+ //   }
+ //  },
  data() {
   return {
    detailsAreVisible: false,
-   friend: {
-    id: "manuel",
-    name: "Manuel Lorenz",
-    phone: "0123 45678 90",
-    email: "manuel@localhost.com",
-   },
+   friend: [],
   };
  },
  methods: {
@@ -69,6 +62,9 @@ export default {
   },
   toggleFavorite() {
    this.$emit("toggle-favorite", this.id);
+  },
+  removeFriend() {
+   this.$emit("remove-friend", this.id);
   },
  },
 };
